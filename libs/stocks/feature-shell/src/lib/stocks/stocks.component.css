@@ -1,3 +1,16 @@
 mat-form-field {
   display: block;
 }
+
+
+.from-picker{
+  float: left;
+  width: 49%;
+  padding-right: 1%;
+}
+
+.to-picker{
+  display: inline-block;
+  width: 49%;
+  padding-left: 1%;
+}

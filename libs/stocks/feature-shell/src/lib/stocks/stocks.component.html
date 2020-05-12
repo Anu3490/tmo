@@ -1,10 +1,12 @@
+<div class="wrapper">
 <form [formGroup]="stockPickerForm">
   <mat-form-field>
     <input
       matInput
       placeholder="Symbol e.g AAPL"
       formControlName="symbol"
-      value=""
+      value="" 
+      (keyup)="fetchQuote()"
     />
     <mat-error
       ><span
@@ -17,9 +19,10 @@
     </mat-error>
   </mat-form-field>
 
+<!-- Task 2: Enabling function call on change to eliminate the need of button -->
   <mat-form-field>
     <mat-label>Favorite time period</mat-label>
-    <mat-select formControlName="period">
+    <mat-select formControlName="period" (ngModelChange)="selectDuration()">
       <mat-option
         *ngFor="let timePeriod of timePeriods"
         [value]="timePeriod.value"
@@ -29,7 +32,21 @@
     </mat-select>
   </mat-form-field>
 
-  <button (click)="fetchQuote()" mat-raised-button>Go</button>
+  <!-- Task 3: Added datepickers for custom selection -->
+  <mat-form-field *ngIf="customPeriod" class="from-picker">
+    <mat-label>From Date</mat-label>
+    <input matInput [max]="maxDate" [matDatepicker]="fromPicker" placeholder="Choose a date" [formControl]="fromDate" (dateInput)="fetchDate()" (dateChange)="fetchDate()">
+    <mat-datepicker-toggle matSuffix [for] = "fromPicker"></mat-datepicker-toggle>
+    <mat-datepicker #fromPicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field *ngIf="customPeriod" class="to-picker">
+    <mat-label>To Date</mat-label>
+    <input matInput [max]="maxDate" [matDatepicker]="toPicker" placeholder="Choose a date" [formControl]="toDate" (dateInput)="fetchDate()" (dateChange)="fetchDate()">
+    <mat-datepicker-toggle matSuffix [for] = "toPicker"></mat-datepicker-toggle>
+    <mat-datepicker #toPicker></mat-datepicker>
+  </mat-form-field>
+  <!-- Task 2: Removing the button as it is no longer required -->
+  <!--<button (click)="fetchQuote()" mat-raised-button>Go</button>-->
 </form>
-
 <coding-challenge-chart [data$]="quotes$"></coding-challenge-chart>
+</div>
