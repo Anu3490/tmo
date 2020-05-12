@@ -38,8 +38,14 @@ A proxy has been set up in `stocks` to proxy calls to `locahost:3333` which is t
 Please provide a short code review of the base `master` branch:
 
 1. What is done well?
+    a) Code Modularity and reusability.
+
 2. What would you change?
+    a) The chart takes few seconds to appear on screen, Hence i would have added a spinner to let the user know that some action is being performed.
+    b) I would make the page responsive.
+
 3. Are there any code smells or problematic implementations?
+    Incorrect reference has been used to retrieve chart data.
 
 > Make a PR to fix at least one of the issues that you identify
 
